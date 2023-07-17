@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard | Nac Jewellers - Admin & Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+
+    
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- jsvectormap css -->
+    <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+
+    <!--Swiper slider css-->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Layout config Js -->
+    <script src="assets/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                autoFocus: true,
+                url: "/ajax_ch",
+                method: 'GET',
+                dataType: 'json',
+                success: function(res) {
+                    if(res.msg){
+                    var s = []
+                    var c = []
+
+                    for(raj=0;raj < res.user_list.length; raj++){
+                            s.push(res.user_list[raj].Item_Name)
+                            c.push(res.user_list[raj].count)
+                    }
+                    // chartu
+                    $("#chartu").append(`<div id="customer_impression_charts" data-colors='["--vz-primary", "--vz-danger"]' class="apex-charts" dir="ltr"></div>`)
+                    var linechartcustomerColors=getChartColorsArray("customer_impression_charts");linechartcustomerColors&&(options={series:[{name:"Total Bidding",type:"bar",data:c}],chart:{height:370,type:"line",toolbar:{show:!1}},stroke:{curve:"straight",dashArray:[0,0,8],width:[2,0,2.2]},fill:{opacity:[.1,.9,1]},markers:{size:[0,0,0],strokeWidth:2,hover:{size:4}},xaxis:{categories:s,axisTicks:{show:!1},axisBorder:{show:!1}},grid:{show:!0,xaxis:{lines:{show:!0}},yaxis:{lines:{show:!1}},padding:{top:0,right:-2,bottom:15,left:10}},legend:{show:!0,horizontalAlign:"center",offsetX:0,offsetY:-5,markers:{width:9,height:9,radius:6},itemMargin:{horizontal:10,vertical:0}},plotOptions:{bar:{columnWidth:"20%",barHeight:"70%"}},colors:linechartcustomerColors,tooltip:{shared:!0,y:[{formatter:function(e){return void 0!==e?e.toFixed(0):e}},{formatter:function(e){return void 0!==e?"$"+e.toFixed(2)+"k":e}},{formatter:function(e){return void 0!==e?e.toFixed(0)+" Sales":e}}]}},(chart=new ApexCharts(document.querySelector("#customer_impression_charts"),options)).render());
+
+                }
+                    else{
+                        var s = []
+                        var c = []
+                    }
+                }
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                autoFocus: true,
+                url: "/ajax_ch",
+                method: 'GET',
+                dataType: 'json',
+                success: function(res) {
+                    if(res.msg){
+                    var s = []
+                    var c = []
+                    var data_product = [];                        
+                    for (let data = 0; data<res.user_list.length; data++){
+                        data_product.push({x:res.user_list[data].Item_Name, y:res.user_list[data].count})
+                    }
+                    // charttest
+                    $("#charttest").append(`<div id="column_group_labels" data-colors='["--vz-info"]' class="apex-charts" dir="ltr"></div>`)
+                    function getChartColorsArray(t) {
+    if (null !== document.getElementById(t)) {
+        t = document.getElementById(t).getAttribute("data-colors");
+        if (t)
+            return (t = JSON.parse(t)).map(function (t) {
+                var e = t.replace(" ", "");
+                return -1 === e.indexOf(",")
+                    ? getComputedStyle(document.documentElement).getPropertyValue(e) || e
+                    : 2 == (t = t.split(",")).length
+                    ? "rgba(" + getComputedStyle(document.documentElement).getPropertyValue(t[0]) + "," + t[1] + ")"
+                    : e;
+            });
+    }
+}
+optionsGroup = {
+        series: [
+            {
+                name: "Total Bids",
+                data: data_product,
+            },
+        ],
+        chart: { type: "bar", height: 350, toolbar: { show: !1 } },
+        plotOptions: { bar: { horizontal: !1, columnWidth: "45%" } },        
+        xaxis: {
+            type: "category",
+            
+            labels: {
+                maxHeight: 175
+            },            
+        },
+        // title: { text: "Grouped Labels on the X-axis", style: { fontWeight: 500 } },
+        // tooltip: {
+        //     x: {
+        //         formatter: function (t) {
+        //             return "Q" + dayjs(t).quarter() + " " + dayjs(t).format("YYYY");
+        //         },
+        //     },
+        // },
+    },
+    (chartGroup = new ApexCharts(document.querySelector("#column_group_labels"), optionsGroup)).render();
+
+
+                }
+                    else{
+                        var s = []
+                        var c = []
+                    }
+                }
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                autoFocus: true,
+                url: "/ajax_ch2",
+                method: 'GET',
+                dataType: 'json',
+                success: function(res) {
+                    if(res.msg){
+                    var w = []
+                    var r = []
+                    
+                    for(kik=0;kik < res.chart2.length; kik++) {
+                        w.push(res.chart2[kik].total_Regist) 
+                        r.push(res.chart2[kik].created_date)
+                    }                    
+                    // chart2
+                    $("#chart2").append(`<div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr"></div>`)
+                    function getChartColorsArray(t) {
+                        if (null !== document.getElementById(t))
+                            return (
+                                (t = document.getElementById(t).getAttribute("data-colors")),
+                                (t = JSON.parse(t)).map(function (t) {
+                                    var e = t.replace(" ", "");
+                                    return -1 === e.indexOf(",")
+                                        ? getComputedStyle(document.documentElement).getPropertyValue(e) || e
+                                        : 2 == (t = t.split(",")).length
+                                        ? "rgba(" + getComputedStyle(document.documentElement).getPropertyValue(t[0]) + "," + t[1] + ")"
+                                        : e;
+                                })
+                            );
+                    }
+                    var chart,
+                    chartBarColors = getChartColorsArray("bar_chart"),
+                    chartDatalabelsBarColors =
+                        (chartBarColors &&
+                            ((options = {
+                                chart: { height: 350, type: "bar", toolbar: { show: !1 } },
+                                plotOptions: { bar: { horizontal: !1, columnWidth: "20%" } },
+                                dataLabels: { enabled: !0 },
+                                series: [{ name:"Total Users",data: w }],
+                                fontWeight: 'bold',
+                                colors: chartBarColors,
+                                grid: { borderColor: "#f1f1f1" },
+                                xaxis: { categories: r },  
+                                fontWeight: 'bold',
+                            }),
+                            (chart = new ApexCharts(document.querySelector("#bar_chart"), options)).render()))
+                        }
+                                    else{
+                                        var s = []
+                                        var c = []
+                                    }
+                                }
+                    })
+        });
+    </script>
+
+<style>
+
+    .apexcharts-text tspan {
+        font-family: inherit;
+        font-weight: bold;
+        color-interpolation: linearrgb;
+    }
+    .card-header {
+        border-bottom: 1px solid var(--vz-border-color);
+    }
+    .card-title {
+        font-size: 16px;
+        margin: 0 0 7px 0;
+        color: black;
+    }
+
+    .footer {
+        background-color: var(--vz-footer-bg);
+        width: 100%;
+    }
+    .new-style .container-fluid{
+        max-width: 100% !important;
+    }
+    [data-layout=horizontal] .page-content{
+        margin-top: 0 !important;
+    }
+    .nowrap{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    h1{
+            font-size:30px;
+        }
+        /*Table Style One*/
+        .table .table-header{
+            background:white;
+            color:#333;
+        }
+        .table .table-header .cell{
+            padding:20px;
+            text-align: center;
+        }
+        @media screen and (max-width: 640px){
+            table {
+                overflow-x: auto;
+                display: block;
+            }
+            .table .table-header .cell{
+                padding:20px 5px;
+                text-align: center;
+            }
+        }
+        .textcenter{
+            text-align: center;
+        }
+        .text-muted{
+            color: #777 !important;
+        }
+        .text-uppercase {
+            text-transform: uppercase !important;
+        }
+        .ri-space-ship-line:before {
+            content: "\f166";
+            margin-left: 13px;
+        }
+        .ri-arrow-down-circle-line:before {
+            content: "\ea4a";
+            margin-right: 10px;
+        }
+        .footer {
+            /* color: blueviolet; */
+            background: #2f368a;;
+        }
+        .overflowx{
+            overflow-x: scroll;
+            margin-right: 10px;
+        }
+        /* body {
+            background-color: #e6b3cc;
+        } */
+        @media screen and (min-width:1920px){
+            .overflowx{
+                overflow-x: unset;
+            }
+        }
+        .logo{
+        margin-left: -292px;
+        }
+        .py-4 {
+        padding-top: 1.5rem!important;
+        padding-bottom: 1.5rem!important;
+        border: 1px solid #000;
+        border-color: #c59237!important;
+        }
+        .logo-main {
+            width: 40%;
+        }
+        .strip {
+            width: 100%;
+            background: #2f368a;
+            height: 30px;
+        }
+        [data-layout=horizontal] .page-content{
+            padding-top: 10px !important;
+        }
+        .crm-widget .col{
+            border: none !important;
+        }
+        .page-content.new-style .card {
+            box-shadow: none !important;
+        }
+        .py-4{
+            margin: 0 10px !important;
+                border-radius: 10px;
+            }
+           
+            .col-xl-12 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
+                width: 70%;
+                margin-left: 263px;
+            }
+            .btn-info {
+                color: #fff;
+                background-color: #2f368a;
+                border-color: #2f368a;
+                margin-left: 401px;                    
+            }
+            .section1{
+                padding: 10px 0;
+            }
+            .burron {display: inline-flex;margin: 6px 0;}
+            .burron .product_class {margin: 0 5px;background: #2f368a;border-radius: 5px;}
+            button.btn.btn-soft-success.shadow-none {color: #fff;font-size: 17px;}
+            .section10 {
+                background: #2c458f;
+                padding: 0 20px;
+            }
+            .section11 {
+                padding: 20px 20px 0 20px;
+            }
+            .bodt_txt {
+                font-weight: bold;
+                font-size: 15px;
+                color: #495057 !important;
+            }
+            .ff-secondary.mb-4 span {
+                font-size: 30px;
+            }
+            .padt-0{padding-top: 0;}
+            .section12 {
+                margin: 10px 20px;
+            }
+            span.counter-value.kiki {
+                font-size: 18px !important;
+            }
+    </style>
+</head>
+
+<body>
+
+
+
+   
+    <!-- Begin page -->
+
+
+
+        <div class="section1">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="/"> <img src="assets/images/logo.png"  alt="Logo" class="logo-main" /></a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="vertical-overlay"></div>
+                <div class="section10">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+                                    <div class="burron">
+                                        <div>
+                                            <a href="/product_details" > <button type="button" class="btn btn-soft-success shadow-none"><i class="ri-add-circle-line align-middle me-1"></i>Product List</button></a>
+                                        </div> 
+                                        <div>
+                                            <form class="product_class" action="/user_list" method="get" >  
+                                                <button type="submit" class="btn btn-soft-success shadow-none"><i class="ri-pulse-line"></i>Users</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section11">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <%for(var r=0; r < total_count.length; r++){%>                                                  
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt"> Total Users Registered</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-total_count[r].tc%>"><%-total_count[r].tc%></span></h4>
+                                            
+                                        </div>
+                                        <%}%>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <%for(var c=0; c < count_ba.length; c++){%>
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt">Total Users Bid</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-count_ba[c].tba%>"><%-count_ba[c].tba%></span></h4>
+                                            <%}%>
+                                        </div> 
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-info rounded fs-3">
+                                                <i class="bx bx-shopping-bag"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">                                                                                    
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt"> Total Users Not Bid</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target=" <%=total_count[0].tc - count_ba[0].tba %> "> <%=total_count[0].tc - count_ba[0].tba %> </span></h4>
+                                            
+                                        </div>                                        
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                                                                    
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt">Users Online</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-recent_time.length%>"><%-recent_time.length%></span></h4>
+                                            
+                                        </div>
+                                       
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="section11 padt-0">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body" style="                                min-height: 138px !important;">
+                                    <%for(var r=0; r < top_product.length; r++){%>                                                  
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt"> Top Bid Product</p>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4" style="    font-size: 26px;"><span class="counter-value kiki" data-target="<%-total_count[r].tc%>"><%-top_product[r].Item_Name%></span></h4>
+                                            
+                                        </div>
+                                        <%}%>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <%for(var c=0; c < total_bid.length; c++){%>
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt">Total TIMES USER Bid</p>
+                                        </div>
+                                     </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-total_bid[c].total%>"><%-total_bid[c].total%></span></h4>
+                                            <%}%>
+                                        </div> 
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-info rounded fs-3">
+                                                <i class="bx bx-shopping-bag"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <%for(var r=0; r < success_bid.length; r++){%>                            
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt"> TOTAL SUCCESS ATTEMPTS</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-success_bid[r].count%>"> <%=success_bid[r].count%>%> </span></h4>
+                                            
+                                        </div>
+                                        <%}%>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <%for(var r=0; r < neg_bid.length; r++){%>                                                  
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 bodt_txt">  TOTAL NEGATIVE ATTEMPTS</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="<%-neg_bid[r].nag_attempt%>"><%-neg_bid[r].nag_attempt%></span></h4>
+                                            
+                                        </div>
+                                        <%}%>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-success rounded fs-3">
+                                                <i class="bx bx-dollar-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+               
+                <div class="section12">
+                    
+                    <div class="row">                           
+                            <div class="col-xl-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-0">Bidding Chart</h4>
+                                    </div>
+                                    <div class="card-body" id="charttest">
+                                        
+                                    </div>
+                                </div><!-- end card -->
+                            </div>
+                            <!-- end col -->
+                        
+                        <div class="col-xl-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">User Registration Chart</h4>
+                                </div>
+                                <div class="card-body" id="chart2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="section12 mb-5">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Recently Bid Users</h4>
+                        </div>
+                        <div class="card-body">
+                        <table id="example1" class="table table-bordered dt-responsive table-striped" style="width:100%">
+                            <thead>
+                                <tr class="table-header">
+                                    <th class="cell">User Id</th>
+                                    <th class="cell">User Name</th>
+                                    <th class="cell">Bid Amount</th>
+                                    <th class="cell">Bid Time</th>                                                                              
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var t=0; t < recent_count.length; t++){%>
+                                    <tr>
+                                        <td><%-recent_count[t].user_id%></td>
+                                        <td><%-recent_count[t].user_name%></td>
+                                        <td><%-recent_count[t].bit_amount%></td>
+                                        <td class="text-end"><%-moment(recent_count[t].new_createddate).format('hh:mm A')%></td>                                    
+                                    </tr>
+                                    <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Users Online</h4>
+                        </div>
+                        <div class="card-body">
+                        <table id="example1" class="table table-bordered dt-responsive table-striped" style="width:100%;height: 100% !important;">
+                            <thead>
+                                <tr class="table-header">
+                                    <th class="cell">User Name</th>
+                                    <th class="cell">User Email</th>
+                                    <th class="cell">User Mobile</th>                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var t=0; t < recent_time.length; t++){%>
+                                    <tr>
+                                        <td style="text-align: left;"><%-recent_time[t].user_name%></td>
+                                        <td style="text-align: left;"><%-recent_time[t].email%></td>
+                                        <td style="text-align: center;"><%-recent_time[t].mobile%></td>                                           
+                                    </tr>
+                                    <%}%>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+<div class="clearfix mb-4"></div>
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <!--preloader-->
+    
+    
+
+    <!-- Theme Settings -->
+    
+ 
+
+</div>   
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="assets/js/plugins.js"></script>
+
+
+    
+    <!-- apexcharts -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+   
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="assets/js/plugins.js"></script>
+
+    <!-- apexcharts -->
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.0/dayjs.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.0/plugin/quarterOfYear.min.js"></script>
+    
+    
+    <script src="assets/js/pages/apexcharts-bar.init.js"></script>
+
+    <!-- Dashboard init -->
+    <script src="assets/js/pages/dashboard-ecommerce.init.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
+
+    
+</body>
+<%- include('./partials/footer.ejs')%>
+
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+        order: false,
+        "autoWidth": false
+    });
+});
+</script>
+</html>

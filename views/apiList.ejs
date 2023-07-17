@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" data-layout="vertical" data-layout-style="detached" data-sidebar="light" data-topbar="dark" data-sidebar-size="lg" data-sidebar-image="none">
+    <head>
+        <%- include('./partials/head.ejs') %>
+        <script>
+            sessionStorage.setItem('apiSessionKey', '0');
+            $(document).on('click', '.checkSecretKey', function()
+            {
+                var id = $(this).attr('id')
+                var name = $(this).attr('name')
+                var value = $(this).attr('value')
+                var data = ""
+                var text = ""
+                var buttonText = ""
+                var buttonColor = ""
+                if (id == "execute")
+                {
+                    text = "Enter Secret Key to Execute the API";
+                    buttonText = "Execute"
+                    buttonColor = "#11d1b7"
+                }
+                else if (id == "edit")
+                {
+                    text = "Enter Secret Key to Edit the API";
+                    buttonText = "Edit"
+                    buttonColor = "#5950cb"
+                }
+                else if (id == "delete")
+                {
+                    text = "Enter Secret Key to Delete the API";
+                    buttonText = "Delete"
+                    buttonColor = "#ff7f41"
+                }
+
+                (async () => {
+
+                    const { value: secret_key} = await Swal.fire({
+                        position: 'center',
+                        icon: 'question',
+                        title: text,
+                        input: 'text',
+                        inputPlaceholder: text,
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        focusConfirm: true,
+                        confirmButtonText:buttonText,
+                        confirmButtonColor:buttonColor,
+                        showLoaderOnConfirm: true,
+                        inputValidator: (result) => {
+                            return !result && 'You need to ' && text
+                        }
+                    })
+                    if (secret_key)
+                    {
+                        $.ajax({
+                            url:"/secret_key",
+                            method:"POST",
+                            data : {secret_key:secret_key, data:{method:id, id:name}},
+                            success: function(response)
+                            {
+                                if (response.ok == "0")
+                                {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'info',
+                                        title: 'Session Timed Out\nRedirecting to Login Page',
+                                        timer: 1000,
+                                        timerProgressBar: true,
+                                        showConfirmButton:false,
+                                        willClose: () => {
+                                            window.location.href = "/"
+                                        }
+                                    })
+                                }
+                                else if (response.ok == "Success")
+                                {
+                                    if (response.status == "Deleted")
+                                    {
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'success',
+                                            title: 'API Deleted Sucessfully',
+                                            timer: 1000,
+                                            timerProgressBar: true,
+                                            showConfirmButton:false,
+                                            willClose: () => {
+                                                window.location.href = "/"
+                                            }
+                                        })
+                                    }
+                                    else if(response.status == "Not Deleted")
+                                    {
+                                        Swal.fire({
+                                            position: 'center',
+                                            icon: 'error',
+                                            title: 'Error in Deleting API',
+                                            timer: 1000,
+                                            timerProgressBar: true,
+                                        })
+                                    }
+                                    else
+                                    {
+                                        $('#formID').val(value)
+                                        $('#formStatus').val(response.status)
+                                        $('#formApi_ID').val(name)
+                                        $('#hiddenForm').submit()
+                                    }
+                                }
+                                else if(response.ok == "Failure")
+                                {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: 'Invalid API Key',
+                                        timer: 1000,
+                                        timerProgressBar: true,
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })()
+            })
+            $(document).ready(function(){
+                $('.datatable').DataTable({
+                    'columnDefs': [
+                        { 'orderable': false, 'targets': 5 },
+                        { "searchable": false, 'targets': 5 },
+                        { 'orderable': false, 'targets': 6 },
+                        { "searchable": false, 'targets': 6 }
+                    ],
+                    "sScrollY": ($(window).height() - 450),
+                    "bPaginate": true,
+                });
+            })
+
+        </script>
+        <style>
+            th:nth-child(6)
+            {
+                width: 80px;
+            }
+            @media screen and (max-width: 1366px), screen and (max-height: 768px) {
+                th:nth-child(6)
+                {
+                    width: 300px;
+                }
+            }
+            div .dataTables_scrollBody {
+                border-left: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layout-wrapper">
+            <%- include('./partials/header.ejs') %>
+            <div class="vertical-overlay"></div>
+            <div class="main-content" style="margin-left: auto;">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">API</h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">API Lists</a></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">API Lists</h4>
+                                        <form method="POST" action="/api">
+                                            <button type="submit" name = "type" value = "Add" class="btn btn-primary">Add API</a>
+                                        </form>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class = "col-12">
+                                            <div class="live-preview">
+                                                <div class="row gy-1">
+                                                    <table class="table datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Num</th>
+                                                                <th>Name</th>
+                                                                <th>Method</th>
+                                                                <th>URL</th>
+                                                                <th style="width: 50px;">Status</th>
+                                                                <th style="width: 80px;">Execute</th>
+                                                                <th style="width: 140px;">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% for (var j = 0; j < apiList.length; j++) { %>
+                                                                <% var color = "text-danger" %>
+                                                                <% var value = "Stopped" %>
+                                                                <% if (apiList[j].api_status == 1) { %>
+                                                                    <% color = "text-success" %>
+                                                                    <% value = "Running" %>
+                                                                <% } %>
+                                                                <tr>
+                                                                    <td><%- apiList[j].caption %></td>
+                                                                    <td><%- apiList[j].num %></td>
+                                                                    <td><%- apiList[j].name %></td>
+                                                                    <td><%- apiList[j].method %></td>
+                                                                    <td><%- apiList[j].url %></td>
+                                                                    <td><span class="<%- color %>" id = "status<%- apiList[j].id %>"><%- value %></span></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-success waves-effect waves-light checkSecretKey execute<%- apiList[j].id %>" name = "<%- apiList[j].id %>" id="execute" value = "<%- apiList[j].product_id %>">Execute</button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary waves-effect waves-light checkSecretKey" name = "<%- apiList[j].id %>" id="edit" value = "<%- apiList[j].product_id %>">Edit</button>
+                                                                        <button type="button" class="btn btn-danger waves-effect waves-light checkSecretKey" name = "<%- apiList[j].id %>"  id="delete" value = "<%- apiList[j].product_id %>">Delete</button>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%- include('./partials/footer.ejs')%>
+            </div>
+        </div>
+        <div class="customizer-setting d-none d-md-block">
+            <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+                <i class="ri-arrow-up-line"></i>
+            </button>
+        </div>
+        <form action="/api" method="POST" id="hiddenForm">
+            <input type="hidden" id ="formID" name="id">
+            <input type="hidden" id ="formStatus" name="type">
+            <input type="hidden" id ="formApi_ID" name="api_id">
+        </form>
+    </body>
+</html>
+<script>
+    var mybutton=document.getElementById("back-to-top");
+    function scrollFunction()
+    {
+        100<document.body.scrollTop||100<document.documentElement.scrollTop?mybutton.style.display="block":mybutton.style.display="none"
+    }
+    function topFunction()
+    {
+        document.body.scrollTop=0,document.documentElement.scrollTop=0
+    }
+    window.onscroll=function()
+    {
+        scrollFunction()
+    };
+</script>
