@@ -46,45 +46,49 @@ function login() {
     <Col lg="6" style={{background: "#383990",height:"100vh"}} className='mobpad'>
       <Padding size="25px">
       <TextAlign  alignment="left">
+      <Text style={{zIndex:"99999"}}>
+            <Padding size="10px">
+              <Text>
+                <TextAlign alignment="center">
+                  <fontWeight fontWeight="bold">
+                    <FontSize fontSize="23px">
+                      <Color color="white">
+                      <TextDecoration textDecoration="underline">
+                          Experience the power of data-driven decision-making with Insight Hub.
+                       </TextDecoration>
+                        </Color>
+                    </FontSize>
+                  </fontWeight>
+                </TextAlign>
+             </Text> 
+            </Padding>
+          </Text>
         <Color color="white">
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"> <FontAwesomeIcon icon={faChartBar}  /></Color></FontSize> Operational Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="30px"><Color color="rgb(238 152 73)"> <FontAwesomeIcon icon={faChartBar}  /></Color></FontSize> Operational Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartColumn}  /></Color></FontSize>Financial Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="30px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartColumn}  /></Color></FontSize>Financial Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartArea}  /></Color></FontSize>Performance Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="30px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartArea}  /></Color></FontSize>Performance Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
           <TextAlign alignment="center">
-            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartPie}  /></Color></FontSize>Analytical Reports</Padding></Card.Text>
+            <Card.Text><Padding size="25px"><FontSize fontSize="30px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartPie}  /></Color></FontSize>Analytical Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
           <TextAlign alignment="center">
-            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartSimple}  /></Color></FontSize>Executive Dashboard</Padding></Card.Text>
+            <Card.Text><Padding size="25px"><FontSize fontSize="30px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartSimple}  /></Color></FontSize>Executive Dashboard</Padding></Card.Text>
             </TextAlign>
           </Width>
-          <Card.Text style={{zIndex:"99999",position:"relative",lineHeight:"35px"}}>
-            <Padding size="10px">
-              <TextAlign alignment="center">
-              <Text>
-                <fontWeight fontWeight="bold">
-                  <FontSize fontSize="20px">
-                    Experience the power of data-driven decision-making with Insight Hub.
-                  </FontSize>
-                </fontWeight>
-             </Text> 
-             </TextAlign>
-            </Padding>
-          </Card.Text>
         </Color> 
       </TextAlign>
       </Padding>
