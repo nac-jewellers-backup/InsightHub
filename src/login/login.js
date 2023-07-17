@@ -72,6 +72,19 @@ function login() {
             <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartSimple}  /></Color></FontSize>Executive Dashboard</Padding></Card.Text>
             </TextAlign>
           </Width>
+          <Card.Text style={{zIndex:"99999",position:"relative",lineHeight:"35px"}}>
+            <Padding size="10px">
+              <TextAlign alignment="center">
+              <Text>
+                <fontWeight fontWeight="bold">
+                  <FontSize fontSize="20px">
+                    Experience the power of data-driven decision-making with Insight Hub.
+                  </FontSize>
+                </fontWeight>
+             </Text> 
+             </TextAlign>
+            </Padding>
+          </Card.Text>
         </Color> 
       </TextAlign>
       </Padding>
