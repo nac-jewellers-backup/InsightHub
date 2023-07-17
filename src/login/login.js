@@ -7,6 +7,7 @@ import Width from '../csscomponent/width';
 import Text from '../csscomponent/fontweight';
 import FontSize from '../csscomponent/fontsize';
 import Color from '../csscomponent/color';
+import TextDecoration from '../csscomponent/textdecoration';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartBar, faChartColumn, faChartGantt, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,7 +20,7 @@ function login() {
       <Form className='box center desktop-vmiddle'>
           <Width width="100%">
            <Image src="logo.png" rounded className='login-logo' />
-           <TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px"> NAC IntelliDash</FontSize></Text></TextAlign>
+            <TextDecoration textDecoration="underline"><TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px"> NAC IntelliDash</FontSize></Text></TextAlign></TextDecoration>
             <Form.Group className="mb-3" controlId="formGroupEmail">
               <TextAlign alignment="left">Email address</TextAlign>
               <Form.Control type="email" placeholder="Enter email" style={{padding:"10px"}}/>
