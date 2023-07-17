@@ -9,7 +9,8 @@ import FontSize from '../csscomponent/fontsize';
 import Color from '../csscomponent/color';
 import TextDecoration from '../csscomponent/textdecoration';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartBar, faChartColumn, faChartGantt, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faChartColumn, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { faChartArea } from '@fortawesome/fontawesome-free-solid';
 
 function login() {
   return (
@@ -48,27 +49,27 @@ function login() {
         <Color color="white">
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="#3ee3ff"> <FontAwesomeIcon icon={faChartBar}  /></Color></FontSize> Operational Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"> <FontAwesomeIcon icon={faChartBar}  /></Color></FontSize> Operational Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="#3ee3ff"><FontAwesomeIcon icon={faChartColumn}  /></Color></FontSize>Financial Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartColumn}  /></Color></FontSize>Financial Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
             <TextAlign alignment="center">
-              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="#3ee3ff"><FontAwesomeIcon icon={faChartGantt}  /></Color></FontSize>Performance Reports</Padding></Card.Text>
+              <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartArea}  /></Color></FontSize>Performance Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
           <TextAlign alignment="center">
-            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="#3ee3ff"><FontAwesomeIcon icon={faChartPie}  /></Color></FontSize>Analytical Reports</Padding></Card.Text>
+            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(35 202 255)"><FontAwesomeIcon icon={faChartPie}  /></Color></FontSize>Analytical Reports</Padding></Card.Text>
             </TextAlign>
           </Width>
           <Width width="300px">
           <TextAlign alignment="center">
-            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="#3ee3ff"><FontAwesomeIcon icon={faChartSimple}  /></Color></FontSize>Executive Dashboard</Padding></Card.Text>
+            <Card.Text><Padding size="25px"><FontSize fontSize="25px"><Color color="rgb(238 152 73)"><FontAwesomeIcon icon={faChartSimple}  /></Color></FontSize>Executive Dashboard</Padding></Card.Text>
             </TextAlign>
           </Width>
         </Color> 
