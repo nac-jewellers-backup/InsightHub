@@ -9,6 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import reportWebVitals from './reportWebVitals';
 import Login from './login/login';
 import Dashboard from './dashboard/dashboard';
+import SalesReport from './salesreport/salesreport';
 import Page404 from './page404/page404';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,7 @@ root.render(
 			<Routes>
 				<Route path="/" element={<Login />} />
 				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/salesreport" element={<SalesReport />} />
 				<Route path="*" element={<Page404 />} />
 			</Routes>
 			<App />
