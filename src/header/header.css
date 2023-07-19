@@ -44,6 +44,18 @@ button.center-button.btn.btn-primary:hover {
 .center-button{
   align-items: center;
 }
+.text-center.exit.modal-body {
+  font-size: 20px !important;
+}
+button.cutomof{
+  padding: 5px 25px;
+  font-size: 16px !important;
+}
+.modal-dialog {
+  position: relative;
+  top: 25%;
+  max-width: 500px;
+}
 @media screen and (min-width:992px) {
   .mob-hide {
     display: none;

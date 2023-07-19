@@ -15,12 +15,16 @@
     
 }
 p.card-text {
-    border: 1px solid #eee;
+    border: 1px solid #eee !important;
     border-radius: 10px;
+    color: #fff !important;
 }
 p.design_develop.card-text,
 p.copywright.card-text {
     color: #000;
+}
+.card-text:last-child{
+    margin: 15px 0;
 }
 .man-img{
     position: absolute;

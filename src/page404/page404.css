@@ -19,3 +19,7 @@ p.card-text {
     margin: 0 auto;
     display: block;
 }
+p.errortitle.card-text{
+    border: none !important;
+    color: #000 !important;
+}

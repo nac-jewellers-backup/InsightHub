@@ -22,6 +22,9 @@
     width: 100%;
     color: #878787;
 }
+.footer p.card-text{
+    color: #000 !important;
+}
 
 @media screen and (max-width:991px) {
 
