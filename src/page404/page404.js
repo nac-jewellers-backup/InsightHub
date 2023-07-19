@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import './page404.css';
 import { getUser } from '../misc/authService';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Image, Card } from 'react-bootstrap';
 
 export default function Page404() {
     const navigate = useNavigate();
@@ -15,7 +16,11 @@ export default function Page404() {
         <div>
             <Header />
             <Container>
-                <Button onClick={() => navigate('/dashboard')}>Go Back To Home</Button>
+                <Image src="error-404.png" className='error-img'/>
+                <Card.Text className='errortitle'>
+                         Page Not Found
+                </Card.Text>
+                <Button className='custombt' onClick={() => navigate('/dashboard')}>Go Back To Home</Button>
             </Container>
             <Footer />
         </div>

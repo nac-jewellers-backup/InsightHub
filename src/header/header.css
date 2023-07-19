@@ -1,17 +1,20 @@
 .logo_icon {
   width: 60%;
+  margin: 10px 0;
 }
 
 nav.navbar.navbar-expand-lg.navbar-dark.bg-transparent {
   background: #2c458f !important;
+  padding: 0;
 }
 
 .me-auto.navbar-nav a {
   color: #fff;
   font-size: 16px;
-  padding: 10px 30px !important;
+  padding: 10px 25px !important;
   background: transparent;
   text-align: left;
+  font-weight: 600;
 }
 
 .me-auto.navbar-nav a:hover {
@@ -26,13 +29,30 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-transparent {
   text-align: left;
 }
 
-.me-auto.navbar-nav {
-  justify-content: space-between;
-  width: 100%;
+.center-box{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
-
+button.center-button.btn.btn-primary {
+  background: #2c458f;
+}
+button.center-button.btn.btn-primary:hover {
+  background: #b3821f;
+  border-color: gold;
+}
+.center-button{
+  align-items: center;
+}
 @media screen and (min-width:992px) {
   .mob-hide {
     display: none;
+  }
+}
+@media screen and (min-width:320px) and (max-width:768px){
+  .logo_icon{
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
   }
 }

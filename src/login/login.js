@@ -71,7 +71,7 @@ export default function Login() {
 							<TextDecoration textDecoration="underline"><TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px"> NAC IntelliDash</FontSize></Text></TextAlign></TextDecoration>
 							<Form.Group className="mb-3" controlId="formGroupEmail">
 								<TextAlign alignment="left">EMail Address</TextAlign>
-								<Form.Control type="text" placeholder="Enter EMail Address" style={{ padding: "10px" }} autoComplete='off' value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
+								<Form.Control type="text" placeholder="Enter Email Address" style={{ padding: "10px" }} autoComplete='off' value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formGroupPassword">
 								<TextAlign alignment="left">Password</TextAlign>

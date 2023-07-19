@@ -17,8 +17,10 @@
 p.card-text {
     border: 1px solid #eee;
     border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 10px;
+}
+p.design_develop.card-text,
+p.copywright.card-text {
+    color: #000;
 }
 .man-img{
     position: absolute;
