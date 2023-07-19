@@ -1,31 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Form, Container, Col, Row, Button, Image, Card } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChartBar, faChartColumn, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { faChartArea } from '@fortawesome/fontawesome-free-solid';
+
 import './login.css';
 import TextAlign from '../csscomponent/textalign';
 import Padding from '../csscomponent/padding';
-import { Form, Container, Col, Row, Button, Image, Card } from 'react-bootstrap';
 import Width from '../csscomponent/width';
 import Text from '../csscomponent/fontweight';
 import FontSize from '../csscomponent/fontsize';
 import Color from '../csscomponent/color';
 import TextDecoration from '../csscomponent/textdecoration';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartBar, faChartColumn, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
-import { faChartArea } from '@fortawesome/fontawesome-free-solid';
-import axios from 'axios';
+import login from '../misc/login.json';
+import { setUserSession, getUser } from '../misc/authService';
 
 export default function Login() {
+	const navigate = useNavigate();
 	const [credentials, setCredentials] = useState({ email: '', password: '' });
 	const [err, setErr] = useState('');
 	const [sign, setSign] = useState(false);
 	const emailValidation = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-	const handleSubmit = (e) => {
+	useEffect(() => {
+		if (getUser()) { navigate('/dashboard'); }
+		document.title = 'Login | Vaishali Fabrics';
+	}, [navigate]);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const email = document.getElementById('formGroupEmail');
 		const password = document.getElementById('formGroupPassword');
-		setTimeout(() => {
-			setErr('');
-		}, 2000);
+		setTimeout(() => { setErr(''); }, 2000);
+
 		if (!credentials.email) {
 			setErr('Enter EMail Address');
 			setSign(false);
@@ -39,7 +47,17 @@ export default function Login() {
 			setSign(false);
 			password.focus();
 		} else {
-			setSign(true);
+			for (let i = 0; i < login.length; i++) {
+				if (credentials.email === login[i].email && credentials.password === login[i].password) {
+					setSign(true);
+					setErr('');
+					navigate("/dashboard");
+					setUserSession(login[i]);
+				} else {
+					setSign(false);
+					setErr('Invalid Credentials');
+				}
+			}
 		}
 	};
 
@@ -47,7 +65,7 @@ export default function Login() {
 		<Container fluid>
 			<Row>
 				<Col lg="6" style={{ background: "#eee", margin: "10px 0" }}>
-					<Form className='box center desktop-vmiddle' onSubmit={handleSubmit}>
+					<Form className='box center desktop-vmiddle' onSubmit={handleSubmit} method='POST'>
 						<Width width="100%">
 							<Image src="logo.png" rounded className='login-logo' />
 							<TextDecoration textDecoration="underline"><TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px"> NAC IntelliDash</FontSize></Text></TextAlign></TextDecoration>
