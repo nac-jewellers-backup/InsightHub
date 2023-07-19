@@ -9,6 +9,7 @@ export default function Page404() {
     const navigate = useNavigate();
     useEffect(() => {
         if (!getUser()) { navigate('/'); }
+        document.title = 'Page 404 | NAC IntelliDash';
     }, [navigate]);
     return (
         <div>

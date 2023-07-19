@@ -25,7 +25,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (getUser()) { navigate('/dashboard'); }
-		document.title = 'Login | Vaishali Fabrics';
+		document.title = 'Login | NAC IntelliDash';
 	}, [navigate]);
 
 	const handleSubmit = async (e) => {

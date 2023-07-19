@@ -17,6 +17,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (!getUser()) { navigate('/'); } else { setName(getUser().name) }
+        document.title = 'Dashboard | NAC IntelliDash';
         window.addEventListener('resize', setWindowDimensions);
         return () => { window.removeEventListener('resize', setWindowDimensions); }
     }, [navigate]);
