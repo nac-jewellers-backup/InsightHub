@@ -3,3 +3,9 @@
         font-size: 13px !important;
     }
 }
+
+.active {
+    background: #fff !important;
+    color: #000 !important;
+    border-radius: 5px;
+}
