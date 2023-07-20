@@ -25,7 +25,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (getUser()) { navigate('/dashboard'); }
-		document.title = 'Login | NAC IntelliDash';
+		document.title = 'Login | Insight Hub';
 	}, [navigate]);
 
 	const handleSubmit = async (e) => {
@@ -68,14 +68,14 @@ export default function Login() {
 					<Form className='box center desktop-vmiddle' onSubmit={handleSubmit} method='POST'>
 						<Width width="100%">
 							<Image src="logo.png" rounded className='login-logo' />
-							<TextDecoration textDecoration="underline"><TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px"> NAC IntelliDash</FontSize></Text></TextAlign></TextDecoration>
+							<TextDecoration textDecoration="underline"><TextAlign alignment="center"><Text fontWeight="bold"><FontSize fontSize="22px">Insight Hub</FontSize></Text></TextAlign></TextDecoration>
 							<Form.Group className="mb-3" controlId="formGroupEmail">
-								<TextAlign alignment="left">EMail Address</TextAlign>
-								<Form.Control type="text" placeholder="Enter Email Address" style={{ padding: "10px" }} autoComplete='off' value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
+								<TextAlign alignment="left">Email Address</TextAlign>
+								<Form.Control type="text" placeholder="abc@nacjewellers.net" style={{ padding: "10px" }} autoComplete='off' value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} />
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formGroupPassword">
 								<TextAlign alignment="left">Password</TextAlign>
-								<Form.Control type="password" placeholder="Password" style={{ padding: "10px" }} autoComplete='off' value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
+								<Form.Control type="password" placeholder="xxxxxxx" style={{ padding: "10px" }} autoComplete='off' value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
 							</Form.Group>
 							<Form.Group>
 								<Text>{err && <Color color="red">{err}</Color>}</Text>

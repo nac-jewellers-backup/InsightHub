@@ -15,7 +15,7 @@ export default function SalesReport() {
     }
     useEffect(() => {
         if (!getUser()) { navigate('/'); }
-        document.title = 'Sales Report | NAC IntelliDash';
+        document.title = 'Sales Report | Insight Hub';
         document.getElementById('navSalesReport').classList.add("active");
         window.addEventListener('resize', setWindowDimensions);
         return () => { window.removeEventListener('resize', setWindowDimensions); }
