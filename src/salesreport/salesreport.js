@@ -23,9 +23,9 @@ export default function SalesReport() {
     return (
         <div>
             <Header />
-            <div className='text-center'>
+            <div className='text-center py-2'>
                 <iframe
-                    width={windowWidth - 100}
+                    width={windowWidth - 310}
                     height={windowHeight - 225}
                     title='NAC Reports'
                     src='https://us-east-2.quicksight.aws.amazon.com/sn/embed/share/accounts/185714328388/dashboards/931753bf-95c1-4f72-a77d-44145cd5e4bc?directory_alias=infographicanalytics'
