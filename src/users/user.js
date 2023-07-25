@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { useParams, useNavigate, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, NavLink } from 'react-router-dom';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import './users.css';
-import { Form, Container, Col, Modal,Row, Button } from 'react-bootstrap';
+import { Form, Container, Col, Modal, Row, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faClose, faEdit } from '@fortawesome/free-solid-svg-icons';
 import TextAlign from '../csscomponent/textalign';
@@ -11,53 +11,68 @@ import Padding from '../csscomponent/padding';
 import Width from '../csscomponent/width';
 import Text from '../csscomponent/fontweight';
 import FontSize from '../csscomponent/fontsize';
-import Color from '../csscomponent/color';
+
 export default function User() {
-    const [data, setData] = useState({
-        name:'',mobile:'',email:'',password:'',status:'',role:''
-    });
+    const [data, setData] = useState({ userName: '', userMobile: '', userEmail: '', userPassword: '', userStatus: '', userRole: '' });
+    const [confirmShow, setConfirmShow] = useState(false);
     const [err, setErr] = useState('');
-    const navigate = useNavigate();
     const { id } = useParams();
     const type = (id === 'new') ? 'Add' : 'Edit';
 
     const handleChange = (e) => {
-        const { id,value} = e.target;
-        setData({...data,[id]:value});
+        const { id, value } = e.target;
+        setData({ ...data, [id]: value });
     }
-    const [confirmShow,setConfirmShow] = useState(false);
+
+    const handleMobileChange = (e) => {
+        const { id, value } = e.target;
+        setData({ ...data, [id]: value.replace(/\D/g, '') });
+    }
+
+    const handleBlur = (e) => {
+        e.target.value = e.target.value.trim();
+        const { id, value } = e.target;
+        setData({ ...data, [id]: value.trim() });
+    }
+
     const handleSubmit = (e) => {
-        e.preventDefault();        
-        
-        if(!data.name.trim()){
+        e.preventDefault();
+        const nameRegex = new RegExp(/^[A-Za-z\s]*$/)
+        if (!data.userName.trim()) {
             setConfirmShow(true);
-            setErr('Enter the Name')
-        }
-        else if(!data.mobile.trim()){
-            setErr('Enter the Mobile Number')
-        }
-        else if(!data.email.trim()){
-            setErr('Enter the Email Id')
-        }
-        else if(!data.password.trim()){
-            setErr('Enter the password')
-        }
-        else if(!data.status.trim()){
-            setErr('Select the Status')
-        }
-        else if(!data.role.trim()){
-            setErr('Select the Role')
-        }
-        else{
+            setErr('Enter the Name');
+        } else if (data.userName.length < 5) {
+            setConfirmShow(true);
+            setErr('Minimum Name length should be atleast 5 Character Long');
+        } else if (!nameRegex.test(data.userName)) {
+            setConfirmShow(true);
+            setErr('Invalid User Name');
+        } else if (!data.userMobile.trim()) {
+            setConfirmShow(true);
+            setErr('Enter the Mobile Number');
+        } else if (!data.userEmail.trim()) {
+            setConfirmShow(true);
+            setErr('Enter the Email ID');
+        } else if (!data.userPassword.trim()) {
+            setConfirmShow(true);
+            setErr('Enter the password');
+        } else if (!data.userStatus.trim()) {
+            setConfirmShow(true);
+            setErr('Select the Status');
+        } else if (!data.userRole.trim()) {
+            setConfirmShow(true);
+            setErr('Select the Role');
+        } else {
+            setConfirmShow(false);
             setErr('');
             console.log(data);
         }
     }
 
-    useEffect (()=>{
+    useEffect(() => {
         document.getElementById('navUsers').classList.add('active');
 
-    },[])
+    }, [])
     return (
         <div>
             <Header />
@@ -79,7 +94,7 @@ export default function User() {
                                             <Col sm={{ span: 12 }}>
                                                 <Button type="submit" className='btn btn-success me-1'>
                                                     <Padding size="5px">
-                                                        <FontAwesomeIcon icon={type==='Add'? faAdd : faEdit} /> {type}
+                                                        <FontAwesomeIcon icon={type === 'Add' ? faAdd : faEdit} /> {type}
                                                     </Padding>
                                                 </Button>
 
@@ -93,26 +108,26 @@ export default function User() {
                                     </TextAlign>
                                 </Col>
                             </Row>
-                        </Form.Group>                        
-                        <Form.Group className="mb-3" controlId="name">
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="userName">
                             <TextAlign alignment="left">Name</TextAlign>
-                            <Form.Control type="text" placeholder="Enter Name" style={{ padding: "10px" }} autoComplete='off' value={data.name} onChange={handleChange} />
+                            <Form.Control type="text" placeholder="Enter Name" style={{ padding: "10px" }} autoComplete='off' value={data.userName} maxLength={50} onChange={handleChange} onBlur={handleBlur} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="mobile">
                             <TextAlign alignment="left">Mobile Number</TextAlign>
-                            <Form.Control type="text" placeholder="Enter Mobile Number" style={{ padding: "10px" }} autoComplete='off' value={data.mobile} onChange={handleChange}/>
+                            <Form.Control type="text" placeholder="Enter Mobile Number" style={{ padding: "10px" }} autoComplete='off' maxLength={10} value={data.userMobile} onChange={handleMobileChange} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="email">
                             <TextAlign alignment="left">EMail Address</TextAlign>
-                            <Form.Control type="email" placeholder="Enter EMail Address" style={{ padding: "10px" }} autoComplete='off' value={data.email} onChange={handleChange}/>
+                            <Form.Control type="email" placeholder="Enter EMail Address" style={{ padding: "10px" }} autoComplete='off' value={data.userEmail} onChange={handleChange} onBlur={handleBlur} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <TextAlign alignment="left">Password</TextAlign>
-                            <Form.Control type="password" placeholder="Enter Password" style={{ padding: "10px" }} autoComplete='off' value={data.password} onChange={handleChange}/>
+                            <Form.Control type="password" placeholder="Enter Password" style={{ padding: "10px" }} autoComplete='off' value={data.userPassword} onChange={handleChange} onBlur={handleBlur} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="status">
                             <TextAlign alignment="left">Status</TextAlign>
-                            <Form.Select value={data.status} onChange={handleChange}>
+                            <Form.Select value={data.userStatus} onChange={handleChange}>
                                 <option value='' disabled selected>Select Status</option>
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option>
@@ -120,7 +135,7 @@ export default function User() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="role">
                             <TextAlign alignment="left">Role</TextAlign>
-                            <Form.Select value={data.role} onChange={handleChange}>
+                            <Form.Select value={data.userRole} onChange={handleChange}>
                                 <option value='' disabled selected>Select Role</option>
                                 <option value="Superadmin">Super Admin</option>
                                 <option value="Admin">Admin</option>
@@ -129,7 +144,7 @@ export default function User() {
                     </Width>
                 </Form>
             </Container>
-            <Footer />            
+            <Footer />
             <Modal show={confirmShow} onHide={() => setConfirmShow(false)} animation={false} >
                 <Modal.Header closeButton className='text-center'>
                     <Modal.Title className='text-center text-bold'>Required Filed</Modal.Title>

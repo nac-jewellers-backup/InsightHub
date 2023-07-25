@@ -4,7 +4,7 @@ import { Form, Container, Col, Row, Button, Image, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartBar, faChartColumn, faChartPie, faChartSimple, faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { faChartArea } from '@fortawesome/fontawesome-free-solid';
-import axios from 'axios';
+
 import './login.css';
 import TextAlign from '../csscomponent/textalign';
 import Padding from '../csscomponent/padding';
