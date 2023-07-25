@@ -10,6 +10,10 @@ import reportWebVitals from './reportWebVitals';
 import Login from './login/login';
 import Dashboard from './dashboard/dashboard';
 import SalesReport from './salesreport/salesreport';
+import Users from './users/users';
+import User from './users/user';
+import Roles from './roles/roles';
+import Role from './roles/role';
 import Page404 from './page404/page404';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +24,10 @@ root.render(
 				<Route path="/" element={<Login />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/salesreport" element={<SalesReport />} />
+				<Route path="/users" element={<Users />} />
+				<Route path="/user/:id" element={<User />} />
+				<Route path="/roles" element={<Roles />} />
+				<Route path="/role/:id" element={<Role />} />
 				<Route path="*" element={<Page404 />} />
 			</Routes>
 			<App />

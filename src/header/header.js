@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import './header.css';
 import { Col, Container, Row, Image, Nav, Navbar, Button, Modal } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faSignOut, faChartArea } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faSignOut, faChartArea, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { resetUserSession } from '../misc/authService';
 
 export default function Header() {
@@ -34,6 +34,8 @@ export default function Header() {
 							<Nav className="me-auto">
 								<NavLink to="/dashboard" id='navDashboard' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faHouse} /> Home</NavLink>
 								<NavLink to="/salesreport" id='navSalesReport' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faChartArea} /> Sales Report</NavLink>
+								<NavLink to="/users" id='navUsers' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUser} />Users</NavLink>
+								<NavLink to="/roles" id='navRoles' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUsers} />Roles</NavLink>
 							</Nav>
 						</Navbar.Collapse>
 					</Container>
