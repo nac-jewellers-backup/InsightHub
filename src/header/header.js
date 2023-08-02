@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import './header.css';
 import { Col, Container, Row, Image, Nav, Navbar, Button, Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faSignOut, faChartArea, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faSignOut, faChartArea } from '@fortawesome/free-solid-svg-icons';
 import { resetUserSession } from '../misc/authService';
 
 export default function Header() {
