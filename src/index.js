@@ -24,10 +24,10 @@ root.render(
 				<Route path="/" element={<Login />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/salesreport" element={<SalesReport />} />
-				<Route path="/users" element={<Users />} />
+				{/* <Route path="/users" element={<Users />} />
 				<Route path="/user/:id" element={<User />} />
 				<Route path="/roles" element={<Roles />} />
-				<Route path="/role/:id" element={<Role />} />
+				<Route path="/role/:id" element={<Role />} /> */}
 				<Route path="*" element={<Page404 />} />
 			</Routes>
 			<App />

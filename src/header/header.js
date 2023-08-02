@@ -34,8 +34,8 @@ export default function Header() {
 							<Nav className="me-auto">
 								<NavLink to="/dashboard" id='navDashboard' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faHouse} /> Home</NavLink>
 								<NavLink to="/salesreport" id='navSalesReport' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faChartArea} /> Sales Report</NavLink>
-								<NavLink to="/users" id='navUsers' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUser} />Users</NavLink>
-								<NavLink to="/roles" id='navRoles' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUsers} />Roles</NavLink>
+								{/* <NavLink to="/users" id='navUsers' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUser} />Users</NavLink>
+								<NavLink to="/roles" id='navRoles' style={{ "text-decoration": "none" }}><FontAwesomeIcon icon={faUsers} />Roles</NavLink> */}
 							</Nav>
 						</Navbar.Collapse>
 					</Container>

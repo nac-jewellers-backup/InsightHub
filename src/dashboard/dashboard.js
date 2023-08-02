@@ -30,7 +30,7 @@ export default function Dashboard() {
                     width={windowWidth - 310}
                     height={windowHeight - 225}
                     title='NAC Reports'
-                    src='https://us-east-2.quicksight.aws.amazon.com/sn/embed/share/accounts/185714328388/dashboards/00157b58-53d2-4093-8ed3-72f0b6245902?directory_alias=infographicanalytics'
+                    src='https://us-east-2.quicksight.aws.amazon.com/sn/embed/share/accounts/185714328388/dashboards/a8170bdd-2457-408c-be2d-3607fdc65b49?directory_alias=infographicanalytics'
                 />
             </div>
             <Footer />
